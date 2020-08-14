@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+
+  remote:
+    image: linuxserver/code-server
+    container_name: code-server
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${CODE_TZ}
+      - PASSWORD=${CODE_PASSWORD}
+      - PROXY_DOMAIN=${CODE_PROXY_DOMAIN}
+    volumes:
+      - ./data:/config
+      - ./setup:/setup
+    ports:
+      - 8443:8443
